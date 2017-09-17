@@ -2,12 +2,13 @@
 
 const Application = require('./../src/pages/Application');
 const app = new Application();
-const preconditionHelper = require('./../src/helpers/preconditionHelper');
+const preconditionClear = require('./../src/helpers/preconditionHelper');
 
-describe('Page can manage tasks', function () {
+describe('AllTask page can manage tasks', function () {
 
     beforeEach(function () {
         app.allTaskPage.get();
+        preconditionClear();
     });
 
     describe('Add', function () {
@@ -21,7 +22,7 @@ describe('Page can manage tasks', function () {
 
     describe('Edit', function () {
         beforeEach(function () {
-            preconditionHelper();
+            preconditionClear();
             app.allTaskPage.addNewTask('Task for editing');
         });
 
@@ -43,7 +44,7 @@ describe('Page can manage tasks', function () {
 
     describe('Complete', function () {
         beforeEach(function () {
-            preconditionHelper();
+            preconditionClear();
             app.allTaskPage.addNewTask('Task for completing')
         });
 
@@ -55,7 +56,7 @@ describe('Page can manage tasks', function () {
     
     describe('Complete all', function () {
         beforeEach(function () {
-            preconditionHelper();
+            preconditionClear();
             app.allTaskPage.addNewTask('Task 1 for completing');
             app.allTaskPage.addNewTask('Task 2 for completing');
         });
@@ -66,15 +67,15 @@ describe('Page can manage tasks', function () {
         });
     });
 
-    describe('Uncomplete all', function () {
+    describe('Reopen all', function () {
         beforeEach(function () {
-            preconditionHelper();
+            preconditionClear();
             app.allTaskPage.addNewTask('Task 1 for completing');
             app.allTaskPage.addNewTask('Task 2 for completing');
             app.allTaskPage.markAllTasksDone();
         });
 
-        it('should complete make all tasks as new after clicking on checkbox', function () {
+        it('should make all tasks new after clicking on checkbox', function () {
             app.allTaskPage.markAllTasksUndone();
             expect(app.allTaskPage.countActiveTasks()).toEqual('2');
         });
@@ -82,7 +83,7 @@ describe('Page can manage tasks', function () {
 
     describe('Reopen', function () {
         beforeEach(function () {
-            preconditionHelper();
+            preconditionClear();
             app.allTaskPage.addNewTask('Task 1 for reopening');
             app.allTaskPage.completeOneTask('Task 1 for reopening');
         });
@@ -95,7 +96,7 @@ describe('Page can manage tasks', function () {
 
     describe('Delete', function () {
         beforeEach(function () {
-            preconditionHelper();
+            preconditionClear();
             app.allTaskPage.addNewTask('Task for deleting');
             app.allTaskPage.addNewTask('Task to leave');
         });
@@ -108,7 +109,7 @@ describe('Page can manage tasks', function () {
     
     describe('Clear completed', function () {
         beforeEach(function () {
-            preconditionHelper();
+            preconditionClear();
             app.allTaskPage.addNewTask('Task for completing and deleting');
             app.allTaskPage.addNewTask('Task to leave');
             app.allTaskPage.completeOneTask('Task for completing and deleting');

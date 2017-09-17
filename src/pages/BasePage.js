@@ -11,14 +11,14 @@ class BasePage {
         this.markAllButton = $('#toggle-all');
         this.openedTask = $('label.ng-binding');
         this.openedTasks = $$('label.ng-binding');
-        this.destroyButton = $('button.destroy');
+        this.destroyButton = 'button.destroy';
         this.completedTask = $('li.completed label.ng-binding');
         this.completedTasks = $$('li.completed label.ng-binding');
         this.tasks = $$('#main label.ng-binding');
         this.markTaskDone = element(by.model('todo.completed'));
         this.markTaskUndone = $('li.ng-scope.completed input');
         this.activeTaskCounter = $('strong.ng-binding');
-        this.allLink = $('a[href="#/]');
+        this.allLink = $('a[href="#/"]');
         this.activeLink = $('a[href="#/active"]');
         this.completedLink = $('a[href="#/completed"]');
         this.clearCompletedButton = $('#clear-completed');
@@ -88,7 +88,7 @@ class BasePage {
 
     deleteOneTask(taskText) {
         this.findTaskContainerByText(taskText).click();
-        this.destroyButton.click();
+        this.findTaskContainerByText(taskText).$(this.destroyButton).click();
     }
 
     clearCompletedTasks() {

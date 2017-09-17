@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "node node_modules/protractor/bin/webdriver-manager update",
-    "test": "node node_modules/protractor/built/cli.js config.js"
+    "test": "node node_modules/protractor/built/cli.js conf.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "protractor": "^5.1.2"
+    "jasmine-spec-reporter": "^4.2.1",
+    "protractor": "^5.1.2",
+    "protractor-jasmine2-html-reporter": "0.0.7"
   }
 }
