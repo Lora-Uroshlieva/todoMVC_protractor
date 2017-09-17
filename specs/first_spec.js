@@ -7,6 +7,7 @@ describe('Should add tasks', function () {
     });
 
     it('should create new task', function () {
+        browser.executeScript('localStorage.removeItem("todos-angularjs");');
         let input = element(by.model('newTodo'));
         input.sendKeys('Task 1').sendKeys(protractor.Key.ENTER);
         let counter = element(by.css('strong.ng-binding')).getText();

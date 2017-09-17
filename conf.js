@@ -16,4 +16,4 @@ exports.config = {
             browser.manage().deleteAllCookies();
         });
     }
-}
+};
