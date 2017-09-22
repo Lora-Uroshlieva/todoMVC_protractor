@@ -15,28 +15,28 @@ describe('Additional edit operations', function () {
     });
 
     it('should edit task with pressing enter after input', function () {
-        app.allTaskPage.editTask('This is new task', 'Edited task', 'enter');
-        expect(app.allTaskPage.openedTask.getText()).toEqual('Edited task');
+        app.allTaskPage.section.editTask('This is new task', 'Edited task', 'enter');
+        expect(app.allTaskPage.section.openedTask.getText()).toEqual('Edited task');
     });
 
     it('should edit task with clicking outside after input', function () {
-        app.allTaskPage.editTask('This is new task', 'Edited task', 'click');
-        expect(app.allTaskPage.openedTask.getText()).toEqual('Edited task');
+        app.allTaskPage.section.editTask('This is new task', 'Edited task', 'click');
+        expect(app.allTaskPage.section.openedTask.getText()).toEqual('Edited task');
     });
 
     it('should edit task with pressing tab after input', function () {
-        app.allTaskPage.editTask('This is new task', 'Edited task', 'tab');
-        expect(app.allTaskPage.openedTask.getText()).toEqual('Edited task');
+        app.allTaskPage.section.editTask('This is new task', 'Edited task', 'tab');
+        expect(app.allTaskPage.section.openedTask.getText()).toEqual('Edited task');
     });
 
     it('should cancel edit by press escape', function () {
         browser.actions()
-            .doubleClick(app.allTaskPage.findTaskContainerByText('This is new task')
+            .doubleClick(app.allTaskPage.section.findTaskContainerByText('This is new task')
             .$('.view'))
             .perform();
-        app.allTaskPage.editTaskField.clear().sendKeys('Task will not be edited!');
-        app.allTaskPage.editTaskField.sendKeys(protractor.Key.ESCAPE);
-        expect(app.allTaskPage.findTaskByText('This is new task').getText()).toEqual('This is new task');
+        app.allTaskPage.section.editTaskField.clear().sendKeys('Task will not be edited!');
+        app.allTaskPage.section.editTaskField.sendKeys(protractor.Key.ESCAPE);
+        expect(app.allTaskPage.section.findTaskByText('This is new task').getText()).toEqual('This is new task');
     });
 
 

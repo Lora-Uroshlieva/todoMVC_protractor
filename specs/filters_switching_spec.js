@@ -16,26 +16,22 @@ describe('Switching from filter to filter', function () {
         preconditionHelper.createNewTask(newTask);
     });
 
-    afterEach(function () {
-        preconditionHelper.clearTasks();
-    });
-
     it('should move to completed tasks page', function () {
-        allTaskPage.completedLink.click();
+        allTaskPage.footer.completedLink.click();
         let url = browser.getCurrentUrl();
         expect(url).toEqual('http://todomvc.com/examples/angularjs/#/completed');
     });
 
     it('should move to active tasks page', function () {
-        allTaskPage.completedLink.click();
-        completedTaskPage.activeLink.click();
+        allTaskPage.footer.completedLink.click();
+        completedTaskPage.footer.activeLink.click();
         let url = browser.getCurrentUrl();
         expect(url).toEqual('http://todomvc.com/examples/angularjs/#/active');
     });
 
     it('should move to all tasks page', function () {
-        allTaskPage.completedLink.click();
-        completedTaskPage.allLink.click();
+        allTaskPage.footer.completedLink.click();
+        completedTaskPage.footer.allLink.click();
         let url = browser.getCurrentUrl();
         expect(url).toEqual('http://todomvc.com/examples/angularjs/#/');
     });

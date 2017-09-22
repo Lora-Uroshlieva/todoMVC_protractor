@@ -16,10 +16,10 @@ describe('AllTask page can manage tasks', function () {
 
     describe('Add', function () {
         it('should add new task into list', function () {
-            app.allTaskPage.addNewTask('Task #1');
-            let taskText = app.allTaskPage.openedTask.getText();
+            app.allTaskPage.header.addNewTask('Task #1');
+            let taskText = app.allTaskPage.section.openedTask.getText();
             expect(taskText).toEqual('Task #1');
-            expect(app.allTaskPage.countActiveTasks()).toEqual('1');
+            expect(app.allTaskPage.footer.countActiveTasks()).toEqual('1');
         });
     });
 
@@ -30,18 +30,18 @@ describe('AllTask page can manage tasks', function () {
         });
 
         it('should edit task with clicking enter after input', function () {
-            app.allTaskPage.editTask('This is new task', 'Edited task', 'enter');
-            expect(app.allTaskPage.openedTask.getText()).toEqual('Edited task');
+            app.allTaskPage.section.editTask('This is new task', 'Edited task', 'enter');
+            expect(app.allTaskPage.section.openedTask.getText()).toEqual('Edited task');
         });
 
         it('should edit task with clicking outside after input', function () {
-            app.allTaskPage.editTask('This is new task', 'Edited task', 'click');
-            expect(app.allTaskPage.openedTask.getText()).toEqual('Edited task');
+            app.allTaskPage.section.editTask('This is new task', 'Edited task', 'click');
+            expect(app.allTaskPage.section.openedTask.getText()).toEqual('Edited task');
         });
 
         it('should edit task with clicking tab after input', function () {
-            app.allTaskPage.editTask('This is new task', 'Edited task', 'tab');
-            expect(app.allTaskPage.openedTask.getText()).toEqual('Edited task');
+            app.allTaskPage.section.editTask('This is new task', 'Edited task', 'tab');
+            expect(app.allTaskPage.section.openedTask.getText()).toEqual('Edited task');
         });
     });
 
@@ -52,8 +52,8 @@ describe('AllTask page can manage tasks', function () {
         });
 
         it('should complete one task after clicking on checkbox', function () {
-            app.allTaskPage.completeOneTask('This is new task');
-            expect(app.allTaskPage.countCompletedTasks()).toEqual(1);
+            app.allTaskPage.section.completeOneTask('This is new task');
+            expect(app.allTaskPage.section.countCompletedTasks()).toEqual(1);
         });
     });
     
@@ -64,8 +64,8 @@ describe('AllTask page can manage tasks', function () {
         });
         
         it('should complete all tasks after clicking on checkbox', function () {
-            app.allTaskPage.markAllTasksDone();
-            expect(app.allTaskPage.countCompletedTasks()).toEqual(2);
+            app.allTaskPage.section.markAllTasksDone();
+            expect(app.allTaskPage.section.countCompletedTasks()).toEqual(2);
         });
     });
 
@@ -76,8 +76,8 @@ describe('AllTask page can manage tasks', function () {
         });
 
         it('should make all tasks new after clicking on checkbox', function () {
-            app.allTaskPage.markAllTasksUndone();
-            expect(app.allTaskPage.countActiveTasks()).toEqual('2');
+            app.allTaskPage.section.markAllTasksUndone();
+            expect(app.allTaskPage.footer.countActiveTasks()).toEqual('2');
         });
     });
 
@@ -88,8 +88,8 @@ describe('AllTask page can manage tasks', function () {
         });
 
         it('should reopen task after clicking on checkbox', function () {
-            app.allTaskPage.undoTask('This is completed task');
-            expect(app.allTaskPage.countActiveTasks()).toEqual('1');
+            app.allTaskPage.section.undoTask('This is completed task');
+            expect(app.allTaskPage.footer.countActiveTasks()).toEqual('1');
         });
     });
 
@@ -100,8 +100,8 @@ describe('AllTask page can manage tasks', function () {
         });
 
         it('should delete task by clicking destroy button', function () {
-            app.allTaskPage.deleteOneTask('This is new task');
-            expect(app.allTaskPage.countActiveTasks()).toEqual('1');
+            app.allTaskPage.section.deleteOneTask('This is new task');
+            expect(app.allTaskPage.footer.countActiveTasks()).toEqual('1');
         });
     });
     
@@ -112,8 +112,8 @@ describe('AllTask page can manage tasks', function () {
         });
 
         it('should delete all completed tasks by pushing button', function () {
-            app.allTaskPage.clearCompletedTasks();
-            expect(app.allTaskPage.countActiveTasks()).toEqual('1');
+            app.allTaskPage.footer.clearCompletedTasks();
+            expect(app.allTaskPage.footer.countActiveTasks()).toEqual('1');
         });
     });
 });

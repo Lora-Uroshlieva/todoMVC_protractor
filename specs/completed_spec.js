@@ -20,8 +20,8 @@ describe('Completed task page can manage tasks', function () {
         });
 
         it('should reopen all task after clicking on checkbox', function () {
-            app.completedTaskPage.undoTask('This is completed task');
-            expect(app.completedTaskPage.countActiveTasks()).toEqual('1');
+            app.completedTaskPage.section.undoTask('This is completed task');
+            expect(app.completedTaskPage.footer.countActiveTasks()).toEqual('1');
         });
     });
 
@@ -32,8 +32,8 @@ describe('Completed task page can manage tasks', function () {
         });
 
         it('should complete make all tasks as new after clicking on checkbox', function () {
-            app.allTaskPage.markAllTasksUndone();
-            expect(app.allTaskPage.countActiveTasks()).toEqual('2');
+            app.allTaskPage.section.markAllTasksUndone();
+            expect(app.allTaskPage.footer.countActiveTasks()).toEqual('2');
         });
     });
 
@@ -44,8 +44,8 @@ describe('Completed task page can manage tasks', function () {
         });
 
         it('should delete task by clicking destroy button', function () {
-            app.completedTaskPage.deleteOneTask('This is completed task');
-            expect(app.completedTaskPage.countActiveTasks()).toEqual('1');
+            app.completedTaskPage.section.deleteOneTask('This is completed task');
+            expect(app.completedTaskPage.footer.countActiveTasks()).toEqual('1');
         });
     });
 
@@ -56,8 +56,8 @@ describe('Completed task page can manage tasks', function () {
         });
 
         it('should delete all completed tasks by pushing button', function () {
-            app.completedTaskPage.clearCompletedTasks();
-            expect(app.completedTaskPage.countActiveTasks()).toEqual('1');
+            app.completedTaskPage.footer.clearCompletedTasks();
+            expect(app.completedTaskPage.footer.countActiveTasks()).toEqual('1');
         });
     });
 });
