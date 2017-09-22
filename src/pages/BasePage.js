@@ -61,7 +61,7 @@ class BasePage {
 
         switch (method) {
             case 'click':
-                $('body').click();
+                $('.learn').click();
                 break;
             case 'tab':
                 this.editTaskField.sendKeys(protractor.Key.TAB);
@@ -73,8 +73,6 @@ class BasePage {
                 throw new Error('Method should be "enter" or "click" or "tab"');
         }
     }
-
-    //TODO actually all methods that interacts with tasks should receive target task name as param
 
     completeOneTask(taskText) {
         this.findTaskContainerByText(taskText)

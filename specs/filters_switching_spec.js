@@ -2,20 +2,22 @@
 
 const Application = require('./../src/pages/Application');
 const app = new Application();
-const preconditionClear = require('./../src/helpers/preconditionHelper');
+const preconditionHelper = require('./../src/helpers/preconditionHelper');
 const allTaskPage = app.allTaskPage;
 const activeTaskPage = app.activeTaskPage;
 const completedTaskPage = app.completedTaskPage;
+const Task = require('./../src/models/Task');
+const newTask = new Task('This is new task', false);
 
 describe('Switching from filter to filter', function () {
     beforeEach(function () {
         allTaskPage.get();
-        preconditionClear();
-        allTaskPage.addNewTask('Task 1');
+        preconditionHelper.clearTasks();
+        preconditionHelper.createNewTask(newTask);
     });
 
     afterEach(function () {
-        preconditionClear();
+        preconditionHelper.clearTasks();
     });
 
     it('should move to completed tasks page', function () {

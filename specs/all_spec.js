@@ -2,13 +2,16 @@
 
 const Application = require('./../src/pages/Application');
 const app = new Application();
-const preconditionClear = require('./../src/helpers/preconditionHelper');
+const preconditionHelper = require('./../src/helpers/preconditionHelper');
+const Task = require('./../src/models/Task');
+const newTask = new Task('This is new task', false);
+const completedTask = new Task('This is completed task', true);
 
 describe('AllTask page can manage tasks', function () {
 
     beforeEach(function () {
         app.allTaskPage.get();
-        preconditionClear();
+        preconditionHelper.clearTasks();
     });
 
     describe('Add', function () {
@@ -22,43 +25,42 @@ describe('AllTask page can manage tasks', function () {
 
     describe('Edit', function () {
         beforeEach(function () {
-            preconditionClear();
-            app.allTaskPage.addNewTask('Task for editing');
+            preconditionHelper.clearTasks();
+            preconditionHelper.createNewTask(newTask);
         });
 
         it('should edit task with clicking enter after input', function () {
-            app.allTaskPage.editTask('Task for editing', 'Edited task', 'enter');
+            app.allTaskPage.editTask('This is new task', 'Edited task', 'enter');
             expect(app.allTaskPage.openedTask.getText()).toEqual('Edited task');
         });
 
         it('should edit task with clicking outside after input', function () {
-            app.allTaskPage.editTask('Task for editing', 'Edited task', 'click');
+            app.allTaskPage.editTask('This is new task', 'Edited task', 'click');
             expect(app.allTaskPage.openedTask.getText()).toEqual('Edited task');
         });
 
         it('should edit task with clicking tab after input', function () {
-            app.allTaskPage.editTask('Task for editing', 'Edited task', 'tab');
+            app.allTaskPage.editTask('This is new task', 'Edited task', 'tab');
             expect(app.allTaskPage.openedTask.getText()).toEqual('Edited task');
         });
     });
 
     describe('Complete', function () {
         beforeEach(function () {
-            preconditionClear();
-            app.allTaskPage.addNewTask('Task for completing')
+            preconditionHelper.clearTasks();
+            preconditionHelper.createNewTask(newTask);
         });
 
         it('should complete one task after clicking on checkbox', function () {
-            app.allTaskPage.completeOneTask('Task for completing');
+            app.allTaskPage.completeOneTask('This is new task');
             expect(app.allTaskPage.countCompletedTasks()).toEqual(1);
         });
     });
     
     describe('Complete all', function () {
         beforeEach(function () {
-            preconditionClear();
-            app.allTaskPage.addNewTask('Task 1 for completing');
-            app.allTaskPage.addNewTask('Task 2 for completing');
+            preconditionHelper.clearTasks();
+            preconditionHelper.createSomeTasks(newTask, newTask);
         });
         
         it('should complete all tasks after clicking on checkbox', function () {
@@ -69,10 +71,8 @@ describe('AllTask page can manage tasks', function () {
 
     describe('Reopen all', function () {
         beforeEach(function () {
-            preconditionClear();
-            app.allTaskPage.addNewTask('Task 1 for completing');
-            app.allTaskPage.addNewTask('Task 2 for completing');
-            app.allTaskPage.markAllTasksDone();
+            preconditionHelper.clearTasks();
+            preconditionHelper.createSomeTasks(completedTask, completedTask);
         });
 
         it('should make all tasks new after clicking on checkbox', function () {
@@ -83,36 +83,32 @@ describe('AllTask page can manage tasks', function () {
 
     describe('Reopen', function () {
         beforeEach(function () {
-            preconditionClear();
-            app.allTaskPage.addNewTask('Task 1 for reopening');
-            app.allTaskPage.completeOneTask('Task 1 for reopening');
+            preconditionHelper.clearTasks();
+            preconditionHelper.createNewTask(completedTask);
         });
 
         it('should reopen task after clicking on checkbox', function () {
-            app.allTaskPage.undoTask('Task 1 for reopening');
+            app.allTaskPage.undoTask('This is completed task');
             expect(app.allTaskPage.countActiveTasks()).toEqual('1');
         });
     });
 
     describe('Delete', function () {
         beforeEach(function () {
-            preconditionClear();
-            app.allTaskPage.addNewTask('Task for deleting');
-            app.allTaskPage.addNewTask('Task to leave');
+            preconditionHelper.clearTasks();
+            preconditionHelper.createSomeTasks(newTask, newTask);
         });
 
         it('should delete task by clicking destroy button', function () {
-            app.allTaskPage.deleteOneTask('Task for deleting');
+            app.allTaskPage.deleteOneTask('This is new task');
             expect(app.allTaskPage.countActiveTasks()).toEqual('1');
         });
     });
     
     describe('Clear completed', function () {
         beforeEach(function () {
-            preconditionClear();
-            app.allTaskPage.addNewTask('Task for completing and deleting');
-            app.allTaskPage.addNewTask('Task to leave');
-            app.allTaskPage.completeOneTask('Task for completing and deleting');
+            preconditionHelper.clearTasks();
+            preconditionHelper.createSomeTasks(newTask, completedTask);
         });
 
         it('should delete all completed tasks by pushing button', function () {

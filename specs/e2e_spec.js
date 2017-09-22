@@ -2,7 +2,7 @@
 
 const Application = require('./../src/pages/Application');
 const app = new Application();
-const preconditionClear = require('./../src/helpers/preconditionHelper');
+const preconditionHelper = require('./../src/helpers/preconditionHelper');
 
 
 describe('Check process of adding new tasks and editing', function () {
@@ -13,7 +13,7 @@ describe('Check process of adding new tasks and editing', function () {
 
         //open page and add 1 task by clicking enter
         allTaskPage.get();
-        preconditionClear();
+        preconditionHelper.clearTasks();
         allTaskPage.addNewTask('Task 1');
         allTaskPage.addNewTask('');
         expect(allTaskPage.countActiveTasks()).toEqual('1');
